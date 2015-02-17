@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DC952DB2-13DE-4C6F-88C2-914EA0B52046}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HiveThrift</RootNamespace>
+    <AssemblyName>HiveThrift</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Thrift">
+      <HintPath>..\packages\Thrift.0.9.1.3\lib\net35\Thrift.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Hive2\ByteArrayOutputStream.cs" />
+    <Compile Include="Hive2\EncodingUtils.cs" />
+    <Compile Include="Hive2\PlainMechanism.cs" />
+    <Compile Include="Hive2\SASLClient.cs" />
+    <Compile Include="Hive2\SaslStatus.cs" />
+    <Compile Include="Hive2\TArrayTypeEntry.cs" />
+    <Compile Include="Hive2\TBinaryColumn.cs" />
+    <Compile Include="Hive2\TBoolColumn.cs" />
+    <Compile Include="Hive2\TBoolValue.cs" />
+    <Compile Include="Hive2\TByteColumn.cs" />
+    <Compile Include="Hive2\TByteValue.cs" />
+    <Compile Include="Hive2\TCancelDelegationTokenReq.cs" />
+    <Compile Include="Hive2\TCancelDelegationTokenResp.cs" />
+    <Compile Include="Hive2\TCancelOperationReq.cs" />
+    <Compile Include="Hive2\TCancelOperationResp.cs" />
+    <Compile Include="Hive2\TCLIService.Constants.cs" />
+    <Compile Include="Hive2\TCLIService.cs" />
+    <Compile Include="Hive2\TCloseOperationReq.cs" />
+    <Compile Include="Hive2\TCloseOperationResp.cs" />
+    <Compile Include="Hive2\TCloseSessionReq.cs" />
+    <Compile Include="Hive2\TCloseSessionResp.cs" />
+    <Compile Include="Hive2\TColumn.cs" />
+    <Compile Include="Hive2\TColumnDesc.cs" />
+    <Compile Include="Hive2\TColumnValue.cs" />
+    <Compile Include="Hive2\TDoubleColumn.cs" />
+    <Compile Include="Hive2\TDoubleValue.cs" />
+    <Compile Include="Hive2\TExecuteStatementReq.cs" />
+    <Compile Include="Hive2\TExecuteStatementResp.cs" />
+    <Compile Include="Hive2\TFetchOrientation.cs" />
+    <Compile Include="Hive2\TFetchResultsReq.cs" />
+    <Compile Include="Hive2\TFetchResultsResp.cs" />
+    <Compile Include="Hive2\TGetCatalogsReq.cs" />
+    <Compile Include="Hive2\TGetCatalogsResp.cs" />
+    <Compile Include="Hive2\TGetColumnsReq.cs" />
+    <Compile Include="Hive2\TGetColumnsResp.cs" />
+    <Compile Include="Hive2\TGetDelegationTokenReq.cs" />
+    <Compile Include="Hive2\TGetDelegationTokenResp.cs" />
+    <Compile Include="Hive2\TGetFunctionsReq.cs" />
+    <Compile Include="Hive2\TGetFunctionsResp.cs" />
+    <Compile Include="Hive2\TGetInfoReq.cs" />
+    <Compile Include="Hive2\TGetInfoResp.cs" />
+    <Compile Include="Hive2\TGetInfoType.cs" />
+    <Compile Include="Hive2\TGetInfoValue.cs" />
+    <Compile Include="Hive2\TGetOperationStatusReq.cs" />
+    <Compile Include="Hive2\TGetOperationStatusResp.cs" />
+    <Compile Include="Hive2\TGetResultSetMetadataReq.cs" />
+    <Compile Include="Hive2\TGetResultSetMetadataResp.cs" />
+    <Compile Include="Hive2\TGetSchemasReq.cs" />
+    <Compile Include="Hive2\TGetSchemasResp.cs" />
+    <Compile Include="Hive2\TGetTablesReq.cs" />
+    <Compile Include="Hive2\TGetTablesResp.cs" />
+    <Compile Include="Hive2\TGetTableTypesReq.cs" />
+    <Compile Include="Hive2\TGetTableTypesResp.cs" />
+    <Compile Include="Hive2\TGetTypeInfoReq.cs" />
+    <Compile Include="Hive2\TGetTypeInfoResp.cs" />
+    <Compile Include="Hive2\THandleIdentifier.cs" />
+    <Compile Include="Hive2\TI16Column.cs" />
+    <Compile Include="Hive2\TI16Value.cs" />
+    <Compile Include="Hive2\TI32Column.cs" />
+    <Compile Include="Hive2\TI32Value.cs" />
+    <Compile Include="Hive2\TI64Column.cs" />
+    <Compile Include="Hive2\TI64Value.cs" />
+    <Compile Include="Hive2\TMapTypeEntry.cs" />
+    <Compile Include="Hive2\TMemoryInputTransport .cs" />
+    <Compile Include="Hive2\TOpenSessionReq.cs" />
+    <Compile Include="Hive2\TOpenSessionResp.cs" />
+    <Compile Include="Hive2\TOperationHandle.cs" />
+    <Compile Include="Hive2\TOperationState.cs" />
+    <Compile Include="Hive2\TOperationType.cs" />
+    <Compile Include="Hive2\TPrimitiveTypeEntry.cs" />
+    <Compile Include="Hive2\TProtocolVersion.cs" />
+    <Compile Include="Hive2\TRenewDelegationTokenReq.cs" />
+    <Compile Include="Hive2\TRenewDelegationTokenResp.cs" />
+    <Compile Include="Hive2\TRow.cs" />
+    <Compile Include="Hive2\TRowSet.cs" />
+    <Compile Include="Hive2\TSaslClientTransport .cs" />
+    <Compile Include="Hive2\TSessionHandle.cs" />
+    <Compile Include="Hive2\TStatus.cs" />
+    <Compile Include="Hive2\TStatusCode.cs" />
+    <Compile Include="Hive2\TStringColumn.cs" />
+    <Compile Include="Hive2\TStringValue.cs" />
+    <Compile Include="Hive2\TStructTypeEntry.cs" />
+    <Compile Include="Hive2\TTableSchema.cs" />
+    <Compile Include="Hive2\TTypeDesc.cs" />
+    <Compile Include="Hive2\TTypeEntry.cs" />
+    <Compile Include="Hive2\TTypeId.cs" />
+    <Compile Include="Hive2\TTypeQualifiers.cs" />
+    <Compile Include="Hive2\TTypeQualifierValue.cs" />
+    <Compile Include="Hive2\TUnionTypeEntry.cs" />
+    <Compile Include="Hive2\TUserDefinedTypeEntry.cs" />
+    <Compile Include="Hive\AbortTxnRequest.cs" />
+    <Compile Include="Hive\AddPartitionsRequest.cs" />
+    <Compile Include="Hive\AddPartitionsResult.cs" />
+    <Compile Include="Hive\Adjacency.cs" />
+    <Compile Include="Hive\AdjacencyType.cs" />
+    <Compile Include="Hive\AggrStats.cs" />
+    <Compile Include="Hive\AlreadyExistsException.cs" />
+    <Compile Include="Hive\BinaryColumnStatsData.cs" />
+    <Compile Include="Hive\BooleanColumnStatsData.cs" />
+    <Compile Include="Hive\CheckLockRequest.cs" />
+    <Compile Include="Hive\ColumnStatistics.cs" />
+    <Compile Include="Hive\ColumnStatisticsData.cs" />
+    <Compile Include="Hive\ColumnStatisticsDesc.cs" />
+    <Compile Include="Hive\ColumnStatisticsObj.cs" />
+    <Compile Include="Hive\CommitTxnRequest.cs" />
+    <Compile Include="Hive\CompactionRequest.cs" />
+    <Compile Include="Hive\CompactionType.cs" />
+    <Compile Include="Hive\ConfigValSecurityException.cs" />
+    <Compile Include="Hive\Database.cs" />
+    <Compile Include="Hive\Decimal.cs" />
+    <Compile Include="Hive\DecimalColumnStatsData.cs" />
+    <Compile Include="Hive\DoubleColumnStatsData.cs" />
+    <Compile Include="Hive\DropPartitionsExpr.cs" />
+    <Compile Include="Hive\DropPartitionsRequest.cs" />
+    <Compile Include="Hive\DropPartitionsResult.cs" />
+    <Compile Include="Hive\EnvironmentContext.cs" />
+    <Compile Include="Hive\FacebookService.cs" />
+    <Compile Include="Hive\fb_status.cs" />
+    <Compile Include="Hive\FieldSchema.cs" />
+    <Compile Include="Hive\Function.cs" />
+    <Compile Include="Hive\FunctionType.cs" />
+    <Compile Include="Hive\GetOpenTxnsInfoResponse.cs" />
+    <Compile Include="Hive\GetOpenTxnsResponse.cs" />
+    <Compile Include="Hive\GetPrincipalsInRoleRequest.cs" />
+    <Compile Include="Hive\GetPrincipalsInRoleResponse.cs" />
+    <Compile Include="Hive\GetRoleGrantsForPrincipalRequest.cs" />
+    <Compile Include="Hive\GetRoleGrantsForPrincipalResponse.cs" />
+    <Compile Include="Hive\GrantRevokePrivilegeRequest.cs" />
+    <Compile Include="Hive\GrantRevokePrivilegeResponse.cs" />
+    <Compile Include="Hive\GrantRevokeRoleRequest.cs" />
+    <Compile Include="Hive\GrantRevokeRoleResponse.cs" />
+    <Compile Include="Hive\GrantRevokeType.cs" />
+    <Compile Include="Hive\Graph.cs" />
+    <Compile Include="Hive\HeartbeatRequest.cs" />
+    <Compile Include="Hive\HeartbeatTxnRangeRequest.cs" />
+    <Compile Include="Hive\HeartbeatTxnRangeResponse.cs" />
+    <Compile Include="Hive\HiveClusterStatus.cs" />
+    <Compile Include="Hive\HiveObjectPrivilege.cs" />
+    <Compile Include="Hive\HiveObjectRef.cs" />
+    <Compile Include="Hive\HiveObjectType.cs" />
+    <Compile Include="Hive\HiveServerException.cs" />
+    <Compile Include="Hive\hive_metastore.Constants.cs" />
+    <Compile Include="Hive\Index.cs" />
+    <Compile Include="Hive\IndexAlreadyExistsException.cs" />
+    <Compile Include="Hive\InvalidInputException.cs" />
+    <Compile Include="Hive\InvalidObjectException.cs" />
+    <Compile Include="Hive\InvalidOperationException.cs" />
+    <Compile Include="Hive\InvalidPartitionException.cs" />
+    <Compile Include="Hive\JobTrackerState.cs" />
+    <Compile Include="Hive\LockComponent.cs" />
+    <Compile Include="Hive\LockLevel.cs" />
+    <Compile Include="Hive\LockRequest.cs" />
+    <Compile Include="Hive\LockResponse.cs" />
+    <Compile Include="Hive\LockState.cs" />
+    <Compile Include="Hive\LockType.cs" />
+    <Compile Include="Hive\LongColumnStatsData.cs" />
+    <Compile Include="Hive\MetaException.cs" />
+    <Compile Include="Hive\NodeType.cs" />
+    <Compile Include="Hive\NoSuchLockException.cs" />
+    <Compile Include="Hive\NoSuchObjectException.cs" />
+    <Compile Include="Hive\NoSuchTxnException.cs" />
+    <Compile Include="Hive\OpenTxnRequest.cs" />
+    <Compile Include="Hive\OpenTxnsResponse.cs" />
+    <Compile Include="Hive\Operator.cs" />
+    <Compile Include="Hive\OperatorType.cs" />
+    <Compile Include="Hive\Order.cs" />
+    <Compile Include="Hive\Partition.cs" />
+    <Compile Include="Hive\PartitionEventType.cs" />
+    <Compile Include="Hive\PartitionsByExprRequest.cs" />
+    <Compile Include="Hive\PartitionsByExprResult.cs" />
+    <Compile Include="Hive\PartitionsStatsRequest.cs" />
+    <Compile Include="Hive\PartitionsStatsResult.cs" />
+    <Compile Include="Hive\PrincipalPrivilegeSet.cs" />
+    <Compile Include="Hive\PrincipalType.cs" />
+    <Compile Include="Hive\PrivilegeBag.cs" />
+    <Compile Include="Hive\PrivilegeGrantInfo.cs" />
+    <Compile Include="Hive\Query.cs" />
+    <Compile Include="Hive\QueryPlan.cs" />
+    <Compile Include="Hive\RequestPartsSpec.cs" />
+    <Compile Include="Hive\ResourceType.cs" />
+    <Compile Include="Hive\ResourceUri.cs" />
+    <Compile Include="Hive\Role.cs" />
+    <Compile Include="Hive\RolePrincipalGrant.cs" />
+    <Compile Include="Hive\Schema.cs" />
+    <Compile Include="Hive\SerDeInfo.cs" />
+    <Compile Include="Hive\SetPartitionsStatsRequest.cs" />
+    <Compile Include="Hive\ShowCompactRequest.cs" />
+    <Compile Include="Hive\ShowCompactResponse.cs" />
+    <Compile Include="Hive\ShowCompactResponseElement.cs" />
+    <Compile Include="Hive\ShowLocksRequest.cs" />
+    <Compile Include="Hive\ShowLocksResponse.cs" />
+    <Compile Include="Hive\ShowLocksResponseElement.cs" />
+    <Compile Include="Hive\SkewedInfo.cs" />
+    <Compile Include="Hive\Stage.cs" />
+    <Compile Include="Hive\StageType.cs" />
+    <Compile Include="Hive\StorageDescriptor.cs" />
+    <Compile Include="Hive\StringColumnStatsData.cs" />
+    <Compile Include="Hive\Table.cs" />
+    <Compile Include="Hive\TableStatsRequest.cs" />
+    <Compile Include="Hive\TableStatsResult.cs" />
+    <Compile Include="Hive\Task.cs" />
+    <Compile Include="Hive\TaskType.cs" />
+    <Compile Include="Hive\ThriftHive.cs" />
+    <Compile Include="Hive\ThriftHiveMetastore.cs" />
+    <Compile Include="Hive\TxnAbortedException.cs" />
+    <Compile Include="Hive\TxnInfo.cs" />
+    <Compile Include="Hive\TxnOpenException.cs" />
+    <Compile Include="Hive\TxnState.cs" />
+    <Compile Include="Hive\Type.cs" />
+    <Compile Include="Hive\UnknownDBException.cs" />
+    <Compile Include="Hive\UnknownPartitionException.cs" />
+    <Compile Include="Hive\UnknownTableException.cs" />
+    <Compile Include="Hive\UnlockRequest.cs" />
+    <Compile Include="Hive\Version.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
