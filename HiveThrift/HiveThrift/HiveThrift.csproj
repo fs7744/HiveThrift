@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Hive2\ByteArrayOutputStream.cs" />
     <Compile Include="Hive2\EncodingUtils.cs" />
+    <Compile Include="Hive2\HiveClient.cs" />
     <Compile Include="Hive2\PlainMechanism.cs" />
     <Compile Include="Hive2\SASLClient.cs" />
     <Compile Include="Hive2\SaslStatus.cs" />
