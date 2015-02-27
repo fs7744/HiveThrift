@@ -10,7 +10,7 @@ namespace Example
         {
             try
             {
-                using (var conn = new Connection("10.1.54.42", 10000))
+                using (var conn = new Connection("XX.X.X.X", 10000))
                 {
                     var cursor = conn.GetCursor();
                     cursor.Execute("use lz33");
