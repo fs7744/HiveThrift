@@ -25,10 +25,13 @@ namespace Hive2
 
         protected virtual void Dispose(bool disposing)
         {
-            CloseOperation();
-            m_LastSchema = null;
-            m_Client = null;
-            m_Session = null;
+            if (disposing)
+            {
+                CloseOperation();
+                m_LastSchema = null;
+                m_Client = null;
+                m_Session = null;
+            }
         }
 
         public void Execute(string statement)
@@ -95,7 +98,7 @@ namespace Hive2
             if (m_Operation == null) return null;
             var req = new TFetchResultsReq()
             {
-                MaxRows = int.MaxValue,
+                MaxRows = count,
                 Orientation = TFetchOrientation.FETCH_NEXT,
                 OperationHandle = m_Operation,
             };
