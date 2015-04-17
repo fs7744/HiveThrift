@@ -153,7 +153,7 @@ namespace Hive2
 
         public TRowSet Fetch(int count = int.MaxValue)
         {
-            if (m_Operation == null && !m_Operation.HasResultSet) return null;
+            if (m_Operation == null || !m_Operation.HasResultSet) return null;
             var req = new TFetchResultsReq()
             {
                 MaxRows = count,
@@ -165,7 +165,7 @@ namespace Hive2
             return resultsResp.Results;
         }
 
-        public List<string> GetColumnNames()
+        private List<string> GetColumnNames()
         {
             var schema = GetSchema();
             return schema == null ? null
@@ -174,7 +174,7 @@ namespace Hive2
 
         public TTableSchema GetSchema()
         {
-            if (m_Operation == null) return null;
+            if (m_Operation == null || !m_Operation.HasResultSet) return null;
             else if (m_LastSchema == null)
             {
                 var req = new TGetResultSetMetadataReq(m_Operation);

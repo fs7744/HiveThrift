@@ -10,17 +10,38 @@ namespace Example
         {
             try
             {
-                using (var conn = new Connection("xx.xx.xx.xx", 10000, "xx", "xx", 
+                using (var conn = new Connection("172.16.13.126", 10000, "vq83", "loveNET991Q",
                     TProtocolVersion.HIVE_CLI_SERVICE_PROTOCOL_V6))
                 {
                     var cursor = conn.GetCursor();
-                    cursor.Execute("select * from table");
-                    var list = cursor.FetchMany(100)[0] as IDictionary<string, object>;
-                    foreach (var key in list.Keys)
+                    cursor.Execute("use eims");
+                    var list = cursor.FetchMany(100);
+                    if (!list.IsEmpty())
                     {
-                        Console.WriteLine(key + list[key].ToString());
+                        var dict = list[0] as IDictionary<string, object>;
+                        foreach (var key in dict.Keys)
+                        {
+                            Console.WriteLine(key + dict[key].ToString());
+                        }
                     }
-                  
+                    else
+                    {
+                        Console.WriteLine("no result");
+                    }
+                    cursor.Execute("select * from program");
+                    var list2 = cursor.FetchMany(100);
+                    if (!list2.IsEmpty())
+                    {
+                        var dict = list2[0] as IDictionary<string, object>;
+                        foreach (var key in dict.Keys)
+                        {
+                            Console.WriteLine(key + dict[key].ToString());
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("no result");
+                    }
                 }
             }
             catch (Exception ex)

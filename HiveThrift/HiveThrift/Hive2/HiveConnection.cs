@@ -8,7 +8,7 @@ namespace Hive2
     {
         public static void CheckStatus(this TStatus status)
         {
-            if ((TStatusCode)status.ErrorCode == TStatusCode.ERROR_STATUS || (TStatusCode)status.ErrorCode == TStatusCode.INVALID_HANDLE_STATUS)
+            if (status.__isset.errorMessage)
             {
                 throw new Exception(status.ErrorMessage);
             }
@@ -77,10 +77,13 @@ namespace Hive2
 
         protected virtual void Dispose(bool disposing)
         {
-            Close();
-            m_Client = null;
-            m_Transport = null;
-            m_Session = null;
+            if (disposing)
+            {
+                Close();
+                m_Client = null;
+                m_Transport = null;
+                m_Session = null;
+            }
         }
 
         public void Dispose()
