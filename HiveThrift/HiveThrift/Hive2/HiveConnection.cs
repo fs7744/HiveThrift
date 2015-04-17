@@ -20,13 +20,16 @@ namespace Hive2
         private TSaslClientTransport m_Transport;
         private TCLIService.Client m_Client;
         private TSessionHandle m_Session;
+        private TProtocolVersion m_Version;
 
-        public Connection(string host, int port, string userName = "None", string password = "None")
+        public Connection(string host, int port, string userName = "None", string password = "None",
+            TProtocolVersion version = TProtocolVersion.HIVE_CLI_SERVICE_PROTOCOL_V7)
         {
             var socket = new TSocket(host, port);
             m_Transport = new TSaslClientTransport(socket, userName, password);
             var protocol = new TBinaryProtocol(m_Transport);
             m_Client = new TCLIService.Client(protocol);
+            m_Version = version;
         }
 
         ~Connection()
@@ -36,7 +39,7 @@ namespace Hive2
 
         private TSessionHandle GetSession()
         {
-            TOpenSessionReq openReq = new TOpenSessionReq();
+            TOpenSessionReq openReq = new TOpenSessionReq(m_Version);
             TOpenSessionResp openResp = m_Client.OpenSession(openReq);
             openResp.Status.CheckStatus();
             return openResp.SessionHandle;
@@ -69,7 +72,7 @@ namespace Hive2
         public Cursor GetCursor()
         {
             Open();
-            return new Cursor(m_Session, m_Client);
+            return new Cursor(m_Session, m_Client, m_Version);
         }
 
         protected virtual void Dispose(bool disposing)

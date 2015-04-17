@@ -10,16 +10,17 @@ namespace Example
         {
             try
             {
-                using (var conn = new Connection("XX.X.X.X", 10000))
+                using (var conn = new Connection("xx.xx.xx.xx", 10000, "xx", "xx", 
+                    TProtocolVersion.HIVE_CLI_SERVICE_PROTOCOL_V6))
                 {
                     var cursor = conn.GetCursor();
-                    cursor.Execute("use lz33");
-                    cursor.Execute("show tables");
-                    var list = cursor.FetchMany(100) as IDictionary<string, object>;
+                    cursor.Execute("select * from table");
+                    var list = cursor.FetchMany(100)[0] as IDictionary<string, object>;
                     foreach (var key in list.Keys)
                     {
                         Console.WriteLine(key + list[key].ToString());
                     }
+                  
                 }
             }
             catch (Exception ex)

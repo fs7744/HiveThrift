@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -11,11 +12,14 @@ namespace Hive2
         private TCLIService.Client m_Client;
         private TOperationHandle m_Operation;
         private TTableSchema m_LastSchema;
+        private TProtocolVersion m_Version;
 
-        public Cursor(TSessionHandle m_Session, TCLIService.Client m_Client)
+        public Cursor(TSessionHandle m_Session, TCLIService.Client m_Client,
+            TProtocolVersion version = TProtocolVersion.HIVE_CLI_SERVICE_PROTOCOL_V7)
         {
             this.m_Session = m_Session;
             this.m_Client = m_Client;
+            m_Version = version;
         }
 
         ~Cursor()
@@ -53,24 +57,77 @@ namespace Hive2
             var result = new List<ExpandoObject>();
             var names = GetColumnNames();
             var rowSet = Fetch(size);
-            if (rowSet != null)
-            {
-                foreach (var row in rowSet.Rows)
-                {
-                    var obj = new ExpandoObject();
-                    for (int i = 0; i < row.ColVals.Count; i++)
-                    {
-                        ((IDictionary<string, object>)obj).Add(names[i], GetrValue(row.ColVals[i]));
-                    }
-                    result.Add(obj);
-                }
-            }
+            if (rowSet == null) return result;
+            GetRows(result, names, rowSet);
             return result;
         }
 
         public ExpandoObject FetchOne()
         {
             return FetchMany(1).FirstOrDefault();
+        }
+
+        #region GetRows
+        private void GetRows(List<ExpandoObject> result, List<string> names, TRowSet rowSet)
+        {
+            if (m_Version <= TProtocolVersion.HIVE_CLI_SERVICE_PROTOCOL_V5)
+            {
+                result.AddRange(GetRowByRowBase(names, rowSet));
+            }
+            else if (!names.IsEmpty() && !rowSet.Columns.IsEmpty())
+            {
+                result.AddRange(GetRowByColumnBase(rowSet.Columns, names));
+            }
+        }
+
+        private IEnumerable<ExpandoObject> GetRowByRowBase(List<string> names, TRowSet rowSet)
+        {
+            return rowSet.Rows.Select(j =>
+            {
+                var obj = new ExpandoObject();
+                var dict = obj as IDictionary<string, object>;
+                for (int i = 0; i < j.ColVals.Count; i++)
+                {
+                    dict.Add(names[i], GetrValue(j.ColVals[i]));
+                }
+                return obj;
+            });
+        }
+
+        private IEnumerable<ExpandoObject> GetRowByColumnBase(List<TColumn> columns, List<string> columnNames)
+        {
+            var list = columns.Select(GetrValue).ToArray();
+            int totalRows = list[0].Count;
+            for (int i = 0; i < totalRows; i++)
+            {
+                var obj = new ExpandoObject();
+                var dict = obj as IDictionary<string, object>;
+                for (int j = 0; j < columnNames.Count; j++)
+                {
+                    dict.Add(columnNames[j], list[j][i]);
+                }
+                yield return obj;
+            }
+        }
+
+        private IList GetrValue(TColumn value)
+        {
+            if (value.__isset.stringVal)
+                return value.StringVal.Values;
+            else if (value.__isset.i32Val)
+                return value.I32Val.Values;
+            else if (value.__isset.boolVal)
+                return value.BoolVal.Values;
+            else if (value.__isset.doubleVal)
+                return value.DoubleVal.Values;
+            else if (value.__isset.byteVal)
+                return value.ByteVal.Values;
+            else if (value.__isset.i64Val)
+                return value.I64Val.Values;
+            else if (value.__isset.i16Val)
+                return value.I16Val.Values;
+            else
+                return null;
         }
 
         private object GetrValue(TColumnValue value)
@@ -91,11 +148,12 @@ namespace Hive2
                 return value.I16Val.Value;
             else
                 return null;
-        }
+        } 
+        #endregion
 
         public TRowSet Fetch(int count = int.MaxValue)
         {
-            if (m_Operation == null) return null;
+            if (m_Operation == null && !m_Operation.HasResultSet) return null;
             var req = new TFetchResultsReq()
             {
                 MaxRows = count,

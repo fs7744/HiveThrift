@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Thrift.Transport
 {
-
-    public class EncodingUtils
+    public static class EncodingUtils
     {
         public static void encodeBigEndian(int integer, byte[] buf)
         {
@@ -47,6 +47,33 @@ namespace Thrift.Transport
               ((buf[1] & 0xff) << 16) |
               ((buf[2] & 0xff) << 8) |
               ((buf[3] & 0xff));
+        }
+    }
+}
+
+namespace Hive2
+{
+    public static class Utils
+    {
+        public static bool IsEmpty(this IEnumerable enumerable)
+        {
+            var enumerator = enumerable != null ? enumerable.GetEnumerator() : null;
+            return enumerator == null || !enumerator.MoveNext();
+        }
+
+        public static IEnumerable<List<T>> SplitByCount<T>(this IEnumerable<T> list, int count)
+        {
+            if (list == null || count == 0) throw new ArgumentNullException("list can't be null or count can't be 0");
+            int sendCount = 0;
+            List<T> result = null;
+            while (true)
+            {
+                result = list.Skip(sendCount).Take(count).ToList();
+                if (result.IsEmpty())
+                    break;
+                sendCount += count;
+                yield return result;
+            }
         }
     }
 }
