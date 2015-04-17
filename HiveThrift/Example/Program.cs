@@ -10,11 +10,11 @@ namespace Example
         {
             try
             {
-                using (var conn = new Connection("172.16.13.126", 10000, "vq83", "loveNET991Q",
+                using (var conn = new Connection("xxx", 10000, "xx", "xx",
                     TProtocolVersion.HIVE_CLI_SERVICE_PROTOCOL_V6))
                 {
                     var cursor = conn.GetCursor();
-                    cursor.Execute("use eims");
+                    cursor.Execute("use xx");
                     var list = cursor.FetchMany(100);
                     if (!list.IsEmpty())
                     {
@@ -28,7 +28,7 @@ namespace Example
                     {
                         Console.WriteLine("no result");
                     }
-                    cursor.Execute("select * from program");
+                    cursor.Execute("select * from xx");
                     var list2 = cursor.FetchMany(100);
                     if (!list2.IsEmpty())
                     {
