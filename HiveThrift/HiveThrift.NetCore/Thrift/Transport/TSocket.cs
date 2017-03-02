@@ -178,28 +178,28 @@ namespace Thrift.Transport
                 //, new AsyncCallback(TSocket.ConnectCallback), connectHelper);
                 //if ((!asyncResult.AsyncWaitHandle.WaitOne(this.timeout) ? true : !this.client.Connected))
                 //{
-                //	lock (connectHelper.Mutex)
-                //	{
-                //		if (!connectHelper.CallbackDone)
-                //		{
-                //			connectHelper.DoCleanup = true;
-                //			this.client = null;
-                //		}
-                //		else
-                //		{
-                //			asyncResult.AsyncWaitHandle.Dispose();
-                //			this.client.Dispose();
-                //		}
-                //	}
-                //	throw new TTransportException(TTransportException.ExceptionType.TimedOut, "Connect timed out");
+                //    lock (connectHelper.Mutex)
+                //    {
+                //        if (!connectHelper.CallbackDone)
+                //        {
+                //            connectHelper.DoCleanup = true;
+                //            this.client = null;
+                //        }
+                //        else
+                //        {
+                //            asyncResult.AsyncWaitHandle.Dispose();
+                //            this.client.Dispose();
+                //        }
+                //    }
+                //    throw new TTransportException(TTransportException.ExceptionType.TimedOut, "Connect timed out");
                 //}
-                //else
-                //{
-                //                 this.client.ConnectAsync(this.host, this.port);
-                //}
-                this.inputStream = this.client.GetStream();
-                this.outputStream = this.client.GetStream();
             }
+            else
+            {
+                this.client.ConnectAsync(this.host, this.port).Wait();
+            }
+            this.inputStream = this.client.GetStream();
+            this.outputStream = this.client.GetStream();
         }
 
         private class ConnectHelper
