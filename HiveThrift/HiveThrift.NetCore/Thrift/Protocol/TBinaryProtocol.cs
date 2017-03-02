@@ -206,23 +206,23 @@ namespace Thrift.Protocol
         private delegate void temp(bool b);
 
         public override void WriteBool(bool b)
-
         {
-            var dm = new DynamicMethod("tempWriteBool", null, new Type[] { typeof(bool) });
-            var il = dm.GetILGenerator();
-            var IL_0007 = new Label();
-            var IL_0008 = new Label();
-            il.Emit(OpCodes.Ldarg_0);
-            il.Emit(OpCodes.Brtrue_S, IL_0007);
-            il.Emit(OpCodes.Ldc_I4_0);
-            il.Emit(OpCodes.Br_S, IL_0008);
-            il.MarkLabel(IL_0007);
-            il.Emit(OpCodes.Ldc_I4_1);
-            il.MarkLabel(IL_0008);
-            il.EmitCall(OpCodes.Callvirt, typeof(TBinaryProtocol).GetMethod("WriteByte"), new Type[] { typeof(sbyte) });
-            il.Emit(OpCodes.Ret);
-            var tm = (temp)(dm.CreateDelegate(typeof(TBinaryProtocol)));
-            tm(b);
+            //var dm = new DynamicMethod("tempWriteBool", null, new Type[] { typeof(bool) });
+            //var il = dm.GetILGenerator();
+            //var IL_0007 = new Label();
+            //var IL_0008 = new Label();
+            //il.Emit(OpCodes.Ldarg_0);
+            //il.Emit(OpCodes.Brtrue_S, IL_0007);
+            //il.Emit(OpCodes.Ldc_I4_0);
+            //il.Emit(OpCodes.Br_S, IL_0008);
+            //il.MarkLabel(IL_0007);
+            //il.Emit(OpCodes.Ldc_I4_1);
+            //il.MarkLabel(IL_0008);
+            //il.EmitCall(OpCodes.Callvirt, typeof(TBinaryProtocol).GetMethod("WriteByte"), new Type[] { typeof(sbyte) });
+            //il.Emit(OpCodes.Ret);
+            //var tm = (temp)(dm.CreateDelegate(typeof(TBinaryProtocol)));
+            //tm(b);
+            this.WriteByte((b ? (sbyte)1 : (sbyte)0));
         }
 
         public override void WriteByte(sbyte b)

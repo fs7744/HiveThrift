@@ -27,7 +27,7 @@ namespace Example
                     {
                         Console.WriteLine("no result");
                     }
-                    cursor.Execute("select * from test");
+                    cursor.Execute("select * from XXX");
                     var list2 = cursor.FetchMany(100);
                     if (!list2.IsEmpty())
                     {
