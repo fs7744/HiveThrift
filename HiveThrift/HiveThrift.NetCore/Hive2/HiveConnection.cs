@@ -17,7 +17,7 @@ namespace Hive2
 
     public class Connection : IDisposable
     {
-        private TSaslClientTransport m_Transport;
+        private TTransport m_Transport;
         private TCLIService.Client m_Client;
         private TSessionHandle m_Session;
         private TProtocolVersion m_Version;
@@ -31,6 +31,17 @@ namespace Hive2
             m_Client = new TCLIService.Client(protocol);
             m_Version = version;
         }
+        
+        public Connection(TTransport transport,string userName = null,
+            TProtocolVersion version = TProtocolVersion.HIVE_CLI_SERVICE_PROTOCOL_V7)
+        {
+            m_Transport = transport;
+            var protocol = new TBinaryProtocol(m_Transport);
+            m_Client = new TCLIService.Client(protocol);
+            m_Version = version;
+            m_userName = userName;
+        }
+
 
         ~Connection()
         {
